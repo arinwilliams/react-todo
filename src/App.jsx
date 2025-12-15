@@ -1,14 +1,17 @@
+import { useState } from 'react';
 import './App.css'
 import TodoForm from './TodoForm';
 import TodoList from './TodoList/';
 
+
 function App() {
-  
+  const [newTodo, setNewTodo] = useState("I did it!")
     return (
     <>
       <div>
       <h1>Todo List</h1>
       <TodoForm/>
+      <p>{newTodo}</p>
       <TodoList/>
       </div>
     </>
