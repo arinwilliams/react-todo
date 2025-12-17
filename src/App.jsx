@@ -1,21 +1,25 @@
 import { useState } from 'react';
-import './App.css'
+import './App.css';
 import TodoForm from './TodoForm';
-import TodoList from './TodoList/';
+import TodoList from './TodoList';
 
 
 function App() {
-  const [newTodo, setNewTodo] = useState("I did it!")
+  const [todoList, setTodoList] = useState([]);
+  const addTodo = (title) => {
+    const newTodo = { title, id: Date.now() };
+    setTodoList((todoList) => [...todoList, newTodo]);
+    }
+  
     return (
     <>
       <div>
       <h1>Todo List</h1>
-      <TodoForm/>
-      <p>{newTodo}</p>
-      <TodoList/>
+      <TodoForm onAddTodo={addTodo}/>
+      <TodoList todoList={todoList}/>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
