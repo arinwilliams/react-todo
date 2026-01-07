@@ -14,7 +14,7 @@ export default defineConfig([
     },
     extends: [
       js.configs.recommended,
-      react.configs.recommended,              // React recommended rules
+      react.configs.recommended,              // react recommended rules
       reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
