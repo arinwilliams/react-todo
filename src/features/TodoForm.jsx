@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import TextInputWithLabel from "../shared/TextInputWithLabel.jsx";
 
 function TodoForm({ onAddTodo }) {
     const todoTitleInput = useRef("");
@@ -9,7 +10,7 @@ function TodoForm({ onAddTodo }) {
     event.preventDefault();
     onAddTodo(workingTodoTitle);
     setWorkingTodoTitle("");
-    todoTitleInput.current.focus();
+    todoTitleInput.current?.focus();
     //const title = event.target.title.value
    // event.target.title.value = ""
 
@@ -17,11 +18,10 @@ function TodoForm({ onAddTodo }) {
   
   return (
     <form onSubmit={handleAddTodo}>
-        <label htmlFor="todoTitle">Todo</label>
-        <input 
-            ref={todoTitleInput}
-            id="todoTitle"
-            name="title" 
+        <TextInputWithLabel 
+            inputRef={todoTitleInput} // changed from ref, which is reserved
+            elementId="todoTitle"
+            label="Todo"
             value ={workingTodoTitle}
             onChange={(event) => setWorkingTodoTitle(event.target.value)}
             //note to self: I could also write this as (e) and e.target.value
