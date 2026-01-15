@@ -1,6 +1,6 @@
 import TodoListItem from "./TodoListItem";
 
-function TodoList({ todoList, onCompleteTodo }){
+function TodoList({ todoList, onCompleteTodo, onUpdateTodo }){
     const filteredTodoList = todoList.filter((todo) => !todo.isCompleted);
     return ( 
         filteredTodoList.length === 0 ? (
@@ -11,7 +11,8 @@ function TodoList({ todoList, onCompleteTodo }){
               <TodoListItem 
                 key={todo.id} 
                 todo={todo}
-                onCompleteTodo={onCompleteTodo} 
+                onCompleteTodo={onCompleteTodo}
+                onUpdateTodo={onUpdateTodo}
                 />)}
             </ul>
         )
