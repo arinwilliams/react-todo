@@ -1,0 +1,5 @@
+.list {
+    padding-left: 0; /* I don't want padding on the left*/
+    list-style: none; /* Remove the bullets from the list*/
+    margin: 0;
+}
