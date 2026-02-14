@@ -12,8 +12,14 @@ import styled from "styled-components";
   const StyledButton = styled.button`
     &:disabled {
     font-style: italic; 
-    }
+    };
   `;
+
+  const StyledRow = styled.div`
+    display: grid;
+    gap: 6px;
+    padding: 6px 0;
+    `;
 
 function TodoForm({ onAddTodo, isSaving }) {
     const todoTitleInput = useRef(null);
