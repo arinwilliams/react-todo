@@ -26,7 +26,7 @@ function TextInputWithLabel ({
         <StyledField>
          <StyledLabel htmlFor={elementId}>{label}</StyledLabel>
             <StyledInput 
-                type="text"
+                //type="text"
                 id={elementId} 
                 ref={inputRef}
                 value={value}
