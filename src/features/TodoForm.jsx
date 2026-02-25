@@ -46,8 +46,9 @@ function TodoForm({ onAddTodo, isSaving }) {
             //note to self: I could also write this as (e) and e.target.value
         />
         <StyledButton 
-            //type="submit"
-            disabled={workingTodoTitle.trim() === ''}>
+            type="submit"
+            //disabled={workingTodoTitle.trim() === ''}>
+            disabled={isSaving || workingTodoTitle.trim() === ""}>
             {isSaving ? 'Saving...' : 'Add Todo'}
           </StyledButton>
     </StyledForm>
