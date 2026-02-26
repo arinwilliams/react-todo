@@ -1,0 +1,28 @@
+.header {
+    position: relative;
+    text-align: center;
+}
+
+.heading {
+    text-align: center;
+}
+
+.nav {
+    position: absolute; /* makes nav float top right */
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 16px;
+
+}
+
+.active {
+    color: #999;
+    text-decoration: none;
+}
+
+.inactive {
+    color: #000; /* for primary text */
+    text-decoration: none;
+}
