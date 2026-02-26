@@ -1,8 +1,13 @@
 import { useState, useEffect, useCallback, useReducer } from "react";
+import { Routes, Route, useLocation } from "react-router";
+import Header from "./shared/Header";
+import TodosPage from "./pages/TodosPage";
 import "./App.css";
-import TodoForm from "./features/TodoForm";
-import TodoList from "./features/TodoList/TodoList";
-import TodosViewForm from "./features/TodosViewForm";
+import About from "./pages/About";
+import NotFound from "./pages/NotFound";
+//import TodoForm from "./features/TodoForm";
+//import TodoList from "./features/TodoList/TodoList";
+//import TodosViewForm from "./features/TodosViewForm";
 import styles from "./App.module.css";
 import {
   reducer as todosReducer,
@@ -35,11 +40,22 @@ function App() {
       searchQuery = `&filterByFormula=SEARCH(LOWER("${queryString}"),LOWER({title}))`;
     }
     return encodeURI(`${url}?${sortQuery}${searchQuery}`);
-  }, [url, sortField, sortDirection, queryString]);
+  }, [sortField, sortDirection, queryString]);
   //console.log("Authorization header:", token);
   //console.log("Full URL:", url);  //Addd this one too
   //console.log("Full token:", token);  // And this one
 
+  const location = useLocation();
+  
+  useEffect(() => {
+    if (location.pathname === '/') {
+      document.title = 'Todo List'; 
+    } else if (location.pathname === '/about') {
+      document.title = 'About';
+    } else {
+      document.title = 'Not Found';
+    } 
+  }, [location])
 
   useEffect(() => {
     const fetchTodos = async () => {
@@ -287,38 +303,36 @@ function App() {
   };
 
   return (
-    <>
-    <div className ={styles.wrapper}>
-      <div className={styles.card}>
-        <h1>Todo List</h1>
-        <TodoForm onAddTodo={addTodo} isSaving={isSaving} />
-        <TodoList 
-          todoList={todoList} 
-          onCompleteTodo={completeTodo}
-          onUpdateTodo={updateTodo}
-          isLoading={isLoading} />
-
-            <hr/>
-            <TodosViewForm
+  <>
+    <div className={styles.container}>
+      <Header title="My Todo App" />
+      {errorMessage && <p>{errorMessage}</p>}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <TodosPage
+              onAddTodo={addTodo}
+              isSaving={isSaving}
+              todoList={todoList}
+              onCompleteTodo={completeTodo}
+              onUpdateTodo={updateTodo}
+              isLoading={isLoading}
               sortDirection={sortDirection}
               setSortDirection={setSortDirection}
               sortField={sortField}
               setSortField={setSortField}
               queryString={queryString}
               setQueryString={setQueryString}
-              />
-
-          {errorMessage && (
-            <div className={styles.errorBox}>
-              <hr />
-              <p>{errorMessage}</p>
-              <button onClick={() => dispatch({ type: todoActions.clearError })}>Dismiss</button>
-              </div>
-          )}
-      </div>
-  </div>
-    </>
-  );
+            />
+          }
+        />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
+  </>
+);
 }
 
 export default App;
